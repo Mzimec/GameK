@@ -5,24 +5,29 @@ using UnityEngine.UIElements;
 
 namespace SerializableDictionary {
 
-
+    /// <summary>
+    /// A serializable dictionary that can be used in Unity.
+    /// </summary>
+    /// <typeparam name="TKey">Key type</typeparam>
+    /// <typeparam name="TValue">Value type</typeparam>
     [System.Serializable]
     public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver {
-        // This class is a placeholder for a serializable dictionary.
-        // In Unity, dictionaries are not serializable by default.
-        // You can use this class to create a serializable dictionary.
-        // However, you will need to implement the serialization logic yourself.
-        // This is just a template to get you started.
-
         [SerializeField] public List<TKey> keys = new List<TKey>();
         [SerializeField] public List<TValue> values = new List<TValue>();
 
-        // Called before serialization. Convert the dictionary to a list of keys and values.
+        /// <summary>
+        /// Called before serialization. Convert the dictionary into a list of keys and values.
+        /// </summary>
         public void OnBeforeSerialize() { }
 
-        // Called after deserialization. Convert the list of keys and values back into a dictionary.
+        /// <summary>
+        /// Called after deserialization. Convert the list of keys and values back into a dictionary.
+        /// </summary>
         public void OnAfterDeserialize() => TransferSerializedKeys();
 
+        /// <summary>
+        /// Transfers serialized keys and values into the dictionary.
+        /// </summary>
         public void TransferSerializedKeys() {
             this.Clear();
 
@@ -44,11 +49,19 @@ namespace SerializableDictionary {
         }
     }
 
+
+    /// <summary>
+    /// A wrapper for a list to make it serializable by Unity.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     [System.Serializable]
     public class ListWrapper<T> : List<T> { 
         public List<T> list = new List<T>();
     }
 
+    /// <summary>
+    /// A VisualElement that contains serializable dictionaries for use in UXML.
+    /// </summary>
     [UxmlElement]
     public partial class SerializableDictionaryVisualElement : VisualElement {
         [UxmlAttribute]

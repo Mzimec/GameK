@@ -14,13 +14,37 @@ public interface IEventBus<T> : IUntypedEventBus
     public void Raise(T evt);
 }*/
 
+/// <summary>
+/// Represents a global event bus for a specific event type <typeparamref name="T"/>.
+/// Provides static registration, unregistration, and raising of events.
+/// </summary>
+/// <typeparam name="T">Type of the event, must implement IEvent.</typeparam>
 public static class GlobalEventBus<T>
     where T : IEvent {
-    static readonly HashSet<IEventBinding<T>> _bindings = new HashSet<IEventBinding<T>>(); 
 
+    /// <summary>
+    /// The set of registered event bindings for this event type.
+    /// </summary>
+    static readonly HashSet<IEventBinding<T>> _bindings = new HashSet<IEventBinding<T>>();
+
+    /// <summary>
+    /// Registers a binding to this global event bus.
+    /// </summary>
+    /// <param name="binding">The event binding to register.</param>
     public static void Register(EventBinding<T> binding) => _bindings.Add(binding);
+
+    /// <summary>
+    /// Unregisters a binding from this global event bus.
+    /// </summary>
+    /// <param name="binding">The event binding to remove.</param>
     public static void Unsregister(EventBinding<T> binding) => _bindings.Remove(binding);
 
+
+    /// <summary>
+    /// Raises an event, invoking all registered bindings.
+    /// Uses a snapshot to prevent issues if bindings modify the set during invocation.
+    /// </summary>
+    /// <param name="evt">The event instance to raise.</param>
     public static void Raise(T evt) {
         var snapshot = new HashSet<IEventBinding<T>>(_bindings);
 
@@ -32,6 +56,9 @@ public static class GlobalEventBus<T>
         }
     }
 
+    /// <summary>
+    /// Clears all bindings from this global bus.
+    /// </summary>
     static void Clear() {
         Debug.Log($"Clearing {typeof(T).Name} bindings");
         _bindings.Clear();

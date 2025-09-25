@@ -1,8 +1,16 @@
 using UnityEngine;
 
+/// <summary>
+/// Singleton base class for ScriptableObjects.
+/// </summary>
+/// <typeparam name="T">The type of the ScriptableSingleton<typeparamref name="T"/>.</typeparam>
 public abstract class ScriptableSingleton<T> : ScriptableObject
     where T : ScriptableSingleton<T> {
     private static T _instance;
+
+    /// <summary>
+    /// Singleton instance of the ScriptableObject.
+    /// </summary>
     public static T Instance {
         get {
             if (_instance == null) {
@@ -20,6 +28,9 @@ public abstract class ScriptableSingleton<T> : ScriptableObject
         }
     }
 
+    /// <summary>
+    /// Ensures only one instance exists. Logs a warning if another instance is created.
+    /// </summary>
     protected virtual void OnEnable() {
         if (_instance == null) {
             _instance = this as T;
