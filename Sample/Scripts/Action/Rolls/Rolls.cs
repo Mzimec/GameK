@@ -75,7 +75,7 @@ public struct RollRecord {
     /// <summary>
     /// The result of the roll.
     /// </summary>
-    public ERollResult Result { get; private set; }
+    public ERollResult Result { get; set; }
 
     /// <summary>
     /// The chance of success, calculated as a float between 0 and 1.
@@ -108,7 +108,7 @@ public struct RollRecord {
                 Result = ERollResult.CriticalSuccess;
                 break;
             default:
-                if (Roll >= TargetNumber) {
+                if (Roll >= TargetNumber - RollBonus) {
                     Result = ERollResult.Success;
                 }
                 else {
@@ -140,8 +140,8 @@ public abstract class BaseRollResolver : IRollResolver {
     public virtual Dictionary<ERollResult, float> SuccessChance(RollRecord roll) => new()
     {
         { ERollResult.CriticalFailure, 0.05f },
-        { ERollResult.Failure, ((roll.TargetNumber - roll.RollBonus) / 20f) - 0.1f },
-        { ERollResult.Success, ((20 - roll.TargetNumber + roll.RollBonus) / 20f) - 0.1f },
+        { ERollResult.Failure, ((roll.TargetNumber - roll.RollBonus - 1) / 20f) - 0.05f },
+        { ERollResult.Success, ((21 - roll.TargetNumber + roll.RollBonus) / 20f) - 0.05f },
         { ERollResult.CriticalSuccess, 0.05f },
     };
 }

@@ -31,8 +31,7 @@ public enum EStatCategory {
 /// <summary>
 /// ScriptableObject representing the definition and metadata for a stat type.
 /// </summary>
-[CreateAssetMenu(menuName = "Stats/StatType")]
-public class StatTypeSO : ScriptableObject {
+public class StatTypeSO {
     [SerializeField] private string _statName;
     [SerializeField] private string _description;
     /// <summary>

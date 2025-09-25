@@ -11,6 +11,15 @@ public interface IEntity {
     Guid GuID { get; }
 }
 
+public class Entity : IEntity {
+    string _id;
+    Guid _guid;
+
+    public string Id => _id;
+    public Guid GuID => _guid;
+    public Entity() { }
+}
+
 
 
 /// <summary>
@@ -94,24 +103,27 @@ public interface IHasActions {
 /// Core class representing a character, including stats, attributes, vitals, and actions.
 /// </summary>
 public class CharacterCore :
+    IEntity,
     IHasStats,
     IHasAttributes,
     IHasVitals,
     IHasActions,
     IDamagable,
-    IHasAI{
+    IHasAI,
+    IHasEffects{
 
     /// <summary>
     /// Unique string identifier for the character.
     /// </summary>
     public string Id { get; }
+    public Guid GuID { get; }
     //public CharacterDefinition Definition { get; }
     //public CharacterData SaveData { get; }
 
     /// <summary>
     /// Wrapper for character stats.
     /// </summary>
-    public IStatsWrapper Stats { get; }
+    public IStatsWrapper Stats { get; } = new StatsWrapper();
 
     /// <summary>
     /// Character attributes such as strength, dexterity, etc.

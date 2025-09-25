@@ -103,7 +103,7 @@ public class ModifiableStat<T> : IModifiableStat<T> {
     /// </summary>
     /// <param name="baseValue">The base value of the stat.</param>
     /// <param name="tStat">The stat type definition.</param>
-    public ModifiableStat(T baseValue, StatTypeSO tStat) {
+    public ModifiableStat(T baseValue, StatTypeSO tStat = null) {
         _baseValue = baseValue;
         _modifiers = StatModifiersFactory.Create<T>();
         _value = CalculateValue();
@@ -185,7 +185,7 @@ public class ComparableModifiableStat<T> : ModifiableStat<T>, IComparable<Compar
     /// <param name="tStat"></param>
     /// <param name="minValue"></param>
     /// <param name="maxValue"></param>
-    public ComparableModifiableStat(T baseValue, StatTypeSO tStat, T minValue, T maxValue) : base(baseValue,tStat) {
+    public ComparableModifiableStat(T baseValue, T minValue, T maxValue, StatTypeSO tStat = null) : base(baseValue,tStat) {
         _minValue = minValue;
         _maxValue = maxValue;
     }
@@ -236,7 +236,7 @@ public abstract class AbstractResourceStat<T> : ModifiableStat<T>, IResourceStat
     /// </summary>
     /// <param name="baseValue">Base value of the stat</param>
     /// <param name="tStat">Stat type of the stat</param>
-    public AbstractResourceStat(T baseValue, StatTypeSO tStat) : base(baseValue, tStat) {
+    public AbstractResourceStat(T baseValue, StatTypeSO tStat = null) : base(baseValue, tStat) {
         _currentValue = baseValue;
     }
 
@@ -269,7 +269,7 @@ public class IntResourceStat : AbstractResourceStat<int> {
     }
 
     /// <inheritdoc/>
-    public IntResourceStat(int baseValue, StatTypeSO tStat) : base(baseValue, tStat) { }
+    public IntResourceStat(int baseValue, StatTypeSO tStat = null) : base(baseValue, tStat) { }
     /// <inheritdoc/>
     public IntResourceStat() : base() { }
 
@@ -282,7 +282,7 @@ public class IntResourceStat : AbstractResourceStat<int> {
 /// </summary>
 public class IntComparableStat : ComparableModifiableStat<int> {
     /// <inheritdoc/>
-    public IntComparableStat(int baseValue, StatTypeSO tStat, int minValue, int maxValue) : base(baseValue, tStat, minValue, maxValue) { }
+    public IntComparableStat(int baseValue, int minValue, int maxValue, StatTypeSO tStat = null) : base(baseValue, minValue, maxValue, tStat) { }
     /// <inheritdoc/>
     public IntComparableStat() : base() { }
 
