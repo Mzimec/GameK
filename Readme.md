@@ -21,13 +21,13 @@ V rámci projektu se věnujeme:
 
 - Gridu
  
-##Charakter
+## Charakter
  
 CharacterCore je centrální modelová třída, která reprezentuje herní postavu v systému. 
 Neslouží jako MonoBehaviour, ale jako čistý C# objekt, aby byla logika hry nezávislá na Unity enginu a snadno testovatelná. 
 Tento přístup zároveň umožňuje jednodušší serializaci (save/load) a lepší oddělení datové a prezentační vrstvy.
  
-###Moduly
+### Moduly
  
 CharacterCore slučuje základní moduly, kterédefinují každou herní postavu.
 Prozatím se skaldá z:
@@ -45,7 +45,7 @@ Postupně se musí dodat:
 - Batoh(IInventory) -- Správce předmětů ve vlastnictví charakteru.
 - Doalog(IDialog) -- Správa spouštění Dialogových oken.
  
-###Použité navrhové vzory
+### Použité navrhové vzory
  
 - Composition over Inheritence -- místo velké hierarchie dědičnosti je CharacterCore složen z komponent (staty, vitály, akce). 
 To usnadňuje rozšiřitelnost a znovupoužitelnost.
@@ -60,7 +60,7 @@ Využívám package R3, který ulehčuje práci s Observrem ačkoli, pro jednodu
 - Dependency Injection (částečně) -- Jednotlivé Staty postavy (atributy, redukce poškození...) jsou při jejich inicializaci
 předávány do komponenty IStatsWrapper, která nám pak umožnuje spouštět operace přes všechny staty na charakteru.
  
-###Designové cíle
+### Designové cíle
  
 - Modularita – každý aspekt (staty, vitály, akce) je samostatný modul, který se dá vyvíjet a testovat izolovaně.
  
@@ -70,12 +70,12 @@ předávány do komponenty IStatsWrapper, která nám pak umožnuje spouštět o
  
 - Event-driven architektura – převážně platí mezi dočasnými efekty reagujícími na spouštěcí akce.
  
-##Akční systém
+## Akční systém
  
 Tento modul reprezentuje akční systém hry. 
 Cílem je poskytnout flexibilní a rozšiřitelný způsob, jak popsat, vykonávat a predikovat herní akce – ať už jde o útoky, kouzla, obranné reakce nebo složené sekvence akcí.
  
-###Klíčové komponenty
+### Klíčové komponenty
 
 - IGameAction je základní rozhraní pro všechny herní akce. 
 Definuje metodu Execute pro skutečné provedení akce v herním kontextu (ActionContext).
@@ -93,7 +93,7 @@ Integruje roll resolution (IRollResolver) – umožňuje simulovat RPG logiku (h
 - GameAction reprezentuje herní akci, kterou si může zvolit charakter a provést ve svém tahu.
 Obsahuje metadata a funguje jako root pro strom kompozitních akcí.
  
-###Použité návrhové vzory
+### Použité návrhové vzory
  
 - Composite -- Akce funguje jako strom, kterým procházíme spouštíme chtěné akce.
  
@@ -106,7 +106,7 @@ zaměnitelné komponenty, které určují chování akce bez zásahu do logiky A
  
 - Chain of Responsibility (částečně) – díky vnořeným uzlům a rolím lze sledovat, jak akce postupně předává kontrolu dětem podle výsledku hodu.
  
-###Designové cíle
+### Designové cíle
  
 - Flexibilita – akce lze deklarativně skládat a kombinovat (damage → status effect → další větvení podle úspěchu).
  
@@ -116,13 +116,13 @@ zaměnitelné komponenty, které určují chování akce bez zásahu do logiky A
  
 - Low coupling – díky rozhraním (ITargetingSelector, IRollResolver, IDamageReceiver) lze akce snadno znovupoužít v různých kontextech (boj, skriptované eventy).
  
-##Efekt systém
+## Efekt systém
  
 Tento modul reprezentuje systém efektů, který zajišťuje aplikaci dočasných nebo trvalých změn na postavy (CharacterCore). 
 Efekty mohou upravovat statistiky, spouštět akce při určitých událostech, nebo provést jednorázovou či reverzibilní změnu pomocí jiných akcí. 
 V jednoduchosti jsou efekty něčím, co dočasně ovlivňuje charakter.
  
-###Klíčové komponenty
+### Klíčové komponenty
  
 IEffect je základní rozhrní pro herní efekty, zaručující správné chování při přidání a odebrání efektu.
  
@@ -134,7 +134,7 @@ Opět využíváme Observer pattern při praci s EventBusem.
 
 ActionEffect zastupuje komplexní efekty, které jako při přidání i odebrání spouštějí specifickou IGameAction.
 
-###Designové cíle
+### Designové cíle
  
 Modularita -- každý efekt je samostatná jednotka, která řeší jen jednu věc (staty, akce, reakce na eventy).
 
@@ -144,7 +144,7 @@ Reusability -- efekty lze kombinovat s libovolným IGameAction, IStatModifier ne
 
 Low coupling -- efekty jsou závislé jen na abstrakcích (CharacterCore, IStatsWrapper, IEventBus, IGameAction), nikoliv na konkrétních implementacích.
  
-##Systém statistik
+## Systém statistik
  
 Systém statistik definuje, jak jsou v RPG hře reprezentovány, měněny a spravovány všechny atributy entit (postav, nepřátel i objektů).
 Poskytuje jednotnou vrstvu pro:
@@ -167,18 +167,18 @@ Každý typ má svou logiku změny.
 
 Tento systém tvoří základ pro levelování postavy, výpočet výsledků boje a aplikaci efektů.
  
-###Designové cíle
+### Designové cíle
  
 Vytvořit silný generický tzpový základ pro práci s podstatnými hodnotami v charakteru.
  
-###Wrapper Statistik
+### Wrapper Statistik
 
 IStatWrapper read only kontejner mapujicí druh statu k statu samotnému. 
 Drží referenci pro přístup k libovolnému statu na charakteru. 
 Ideální pro přístup k statům bez znalosti z jakého modulu charakteru pochází.
 Například idelní pro přístup efektu ke statu.
  
-##AI
+## AI
  
 Tento modul definuje rozhraní a základní implementace pro umělou inteligenci (AI) postav v tahovém RPG.
  
@@ -218,7 +218,7 @@ Definuje algoritmus:
 
 - Najít potenciální cíle → GetPotentialTargets
 
-###Použité návrhové vzory
+### Použité návrhové vzory
 
 - Strategy -- různé AI mohou implementovat ICharacterAI.
 
@@ -230,34 +230,34 @@ Definuje algoritmus:
 
 - Separation of Concerns -- AI nerozumí mapě ani cílům, jen využívá specializované služby.
  
-#Co je třeba dodělat
+# Co je třeba dodělat
  
-##Inventory
+## Inventory
  
 Představa je taková, že každý předmět bude mít Metody OnEquip a OnUnequip, které charakteru dají popřípadě uberou nějaké efekty.
 V případě UsableItem mu přidají i nové akce. Ale chování je vlastně velmi podobné jako chování efektu, aneb dočasné změna stavu charakteru.
  
-##Modul charakteru Actions
+## Modul charakteru Actions
  
 Ačkoli samotné akce jsou již celkem naplánovány, musí se vztvořit kvalitní rozhraní,
 které bude mít uložené akce. A shopnost vracet, které akce jsou v kole ještě pouzitelne.
  
-##Modul Dialogů
+## Modul Dialogů
  
 Plán je vytvořit stromovou strukturu dialogů, které budou ukládany v .json souborech.
  
-##Evaluační funkce pro AI
+## Evaluační funkce pro AI
 
 Možností je více. A bylo by zajímavé vyzkoušet různé složitější algoritmy MonteCarlo, a nebo aspoň funkce zpracovávat synergie spojenců,
 určovat společný cíl atd. Nyní je to připraveno pro jednoduchou hodnotící funkci, která odhadne výsledek funkce a ohodnotí ji na paramatrech.
 Není tedy kontextová.
  
-##Battle Manager
+## Battle Manager
  
 Správce tahového souboje. Představa není nic složitého. Šlo by o frontu charakterů, určenou podle jejich iniciativy.
 S Metodami pro ukončení a inicializaci souboje.
  
-##Grid a Grid Operace
+## Grid a Grid Operace
  
 Toto bude ještě hodně práce. Půjde o zástupce, mapy, který si udržuje stav o jednotlivých dlaždicích.
 Nevím jestli to dává 100% smysl, ale v plánu mám vytvořit si časté TileData jako ScriptableObject. 
@@ -267,15 +267,15 @@ A v samotném GridManageru bych si kdyžtak držel jen odchylky od stavajících
 Grid Operace, tím myslím vytvořit další užitečné operace pro rychlou práci s Gridem.
 Hledání cesty, Ideální cesty, Získávání růyných tvarů AoE akcí. Určení zda je volná trajektorie pro střelbu...
  
-##Drobné třídy, které rozvadějí tuto strukturu.
+## Drobné třídy, které rozvadějí tuto strukturu.
  
 Například definice základních akcí. V tuto chvíli máme jen DealDamage.
  
-##Logging
+## Logging
  
 Mnoho struktur, které za běhu vytváříme už počítají s Loggingem, ale zatím není samotný systém v provozu.
  
-#Samotná hra
+# Samotná hra
  
 Stávající "Engine" je velmi podobný v základu DnD. Rozhodl jsem se to v rakovém to ramci 
 rozpracovat, jelikož jsem se mohl věnovat vzmýšlení Architektury a nikoliv systému.
