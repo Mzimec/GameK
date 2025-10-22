@@ -47,11 +47,7 @@ Během kola táhnou všechny charaktery: Jednotlivé frakce se střídají v taz
 Pokud není charkterů v jednotlivých bojových skupinách stejně, těm, které dojdou charktery končí kolo.
 Každá postava má určité **Akční Body (AP)**, které určuje, kolik akcí může provést.
 
-### 4.2 Akce
-Každý charakter má svůj strom ackí, které si během levlování odemyká.
-Každá taková akce je cestou z jednoho bojového postoje do druhého.
-Jednotlivé bojové postoje dávají postavám kombinaci pasivních buffů a debuffů, dokud v tomto postoji stojí.
-Dejme tomu že tedy akcí *Uppercut* se můžeme dostat z bojového postoje *Alber* do *Vom Tag*.
+### 4.2 Typy akcí
 - **Pohyb** – stojí určité množství AP podle vzdálenosti.  
 - **Útok** – hod proti obraně cíle (Attack Roll).  
 - **Kouzlo / Schopnost** – může mít AoE efekt, vyžaduje Saving Throw.  
