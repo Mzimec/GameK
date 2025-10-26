@@ -52,17 +52,17 @@ Každý charakter má svůj strom ackí, které si během levlování odemyká.
 Každá taková akce je cestou z jednoho bojového postoje do druhého.
 Jednotlivé bojové postoje dávají postavám kombinaci pasivních buffů a debuffů, dokud v tomto postoji stojí.
 Dejme tomu že tedy akcí *Uppercut* se můžeme dostat z bojového postoje *Alber* do *Vom Tag*.
-- **Pohyb** – stojí určité množství AP podle vzdálenosti.  
-- **Útok** – hod proti obraně cíle (Attack Roll).  
-- **Kouzlo / Schopnost** – může mít AoE efekt, vyžaduje Saving Throw.  
-- **Interakce** – otevření truhly, aktivace zařízení, pomoc spojenci.  
+- **Pohyb** – stojí určité množství AP podle vzdálenosti. Nemění bojový postoj.    
+- **Interakce** – otevření truhly, aktivace zařízení, pomoc spojenci. Nemění bojový postoj. 
 
 ### 4.3 Rozhodovací vrstvy hráče
-1. **Taktická úroveň:** výběr cíle, pozice, pořadí akcí.  
-2. **Strategická úroveň:** správné rozložení zdrojů (mana, cooldowny, buffy).  
-3. **Riziková úroveň:** posouzení šance na úspěch (pravděpodobnost hodu).  
+- **Taktická úroveň:** výběr cíle, pozice, pořadí akcí v rámci kola.  
+- **Startegická úrove:** uvažování do budoucích kol (v jakém postoji chci skončit - ať to ovlivňuje buffy či jaké akce chci provádět v příštím kole).
+- **Riziková úroveň:** posouzení šance na úspěch (pravděpodobnost hodu).  
+- **Roleplayová úroveň:** posouzení toho, jak chci aby se můj charkter v souboji zachoval, nebo jaký bude jeho výsledek.
 
 ### 4.4 Typy hodů
+Některé akce vyžadují nějaký hod, aby určily svou úspěšnost. Prozatím se držím myšlenky hodů DnD.
 - **Útočný hod (Attack Roll):** porovnává d20 + bonus s cílovým AC.  
 - **Záchranný hod (Saving Throw):** cíl se brání proti efektu (DC kouzla).  
 - **Kontrolní hod (Skill Check):** používá se mimo boj (např. Lockpicking, Persuasion).  
@@ -80,27 +80,34 @@ Dejme tomu že tedy akcí *Uppercut* se můžeme dostat z bojového postoje *Alb
 ## 5. Postavy a rozvoj
 
 ### 5.1 Atributy
-Základní šestice:
-- **Strength (Síla):** ovlivňuje melee útoky a nesení.  
-- **Dexterity (Obratnost):** ovlivňuje iniciativu, obranu a ranged útoky.  
-- **Constitution (Odolnost):** určuje HP a výdrž.  
-- **Intelligence (Inteligence):** ovlivňuje magické dovednosti a znalosti.  
-- **Wisdom (Moudrost):** ovlivňuje vnímání a záchranné hody.  
-- **Charisma (Charisma):** pro sociální interakce a magii založenou na vůli.  
+Základní statistiky charakteru, od kterých se odvíjí mnoho dalších vlastností.
+- **Power (Moc):** určuje poškození většiny schopností.  
+- **Accuracy (Přesnost):** určuje přesnost většiny schopností.  
+- **Dexterity (Obratnost):** určuje šanci na vzhnutí se schopnostem  
+- **Sturdiness (Zdatnost):** určuje redukci příchozího poškození, medicinské a zalésacké dovednosti.  
+- **Willpower (Vůle):** určuje šanci uspět proti negativním efektům shopností.  
+- **Charisma (Charisma):** určuje šanci úspěchu v konverzacích a slevu při nákupech.
+- **Arcana (Metafyzika):**  určuje schopnost postavy ovládat magické nauky.
+- **Faith (Víra):** určuje porozumnění postavy Božím přičiněním.
 
-### 5.2 Schopnosti (Abilities)
+### 5.2 Vedlejší statistiky
+Každá postava bude mít své vedlejší statistiky vycháyející z hlavních attributů.
+Například critical chance, crit multiplier, resistances...
+
+### 5.3 Schopnosti (Abilities)
 Každá schopnost je definována jako **akce**, kterou může postava použít.  
 Mají parametry:
 - Typ (útok, kouzlo, buff, utility).  
-- Cíl (single target, area, self).  
+- Cíl (single target, area, self). 
+- Typ cíle (spojenec, nepřítel, charakter, tile...). 
 - Cena (v AP, nebo speciální zdroj).  
 - DC (obtížnost pro záchranný hod).  
 - Vedlejší efekty (poškození, omráčení, hoření…).  
 
-### 5.3 Rozvoj
-- Levelování přináší nové schopnosti a zlepšuje staty.  
-- Volba specializací (např. Paladin → Crusader / Defender).  
-- Hráč dělá významné volby v progresu postavy.  
+### 5.4 Rozvoj
+Postava se bude dostavat zkušenosti při plnění úkolů, nikoli při zabíjení nepřatelů.
+Při level upu postava získáva životy, může rozdistribuovat daný počet bodů do svých attributů, 
+získat pasivní perk nebo si odemknout novou sadu úderů.  
 
 ---
 
@@ -149,16 +156,9 @@ Cílem je, aby hráč měl **čas plánovat, ale necítil únavu** z mikromanage
 
 ---
 
-## 9. Atmosféra a estetika
+## 9. Předměty
 
-- **Tón:** Temně-hrdinský fantasy svět s důrazem na morální dilemata.  
-- **Inspirace:** Planescape: Torment, Pathfinder, Divinity: Original Sin II.  
-- **Hudba:** Orchestrální, s motivy podle frakcí a prostředí.  
-- **UI styl:** Taktický, čitelný, s jemnými runovými ornamenty.  
-
----
-
-## 10. Dlouhodobé cíle vývoje
-- Implementovat plnohodnotný **Combat Editor** (vizuální tvorba akcí).  
-- Přidat **AI Personality systém** pro unikátní rozhodování NPC.  
-- Rozšířit **campaign mode** o mapu světa a volby s trvalými následky.  
+- **Příběhové předměty:** potřebné pro slnění úkolu.
+- **Zbraně:** ovliňují útočné akce svými statistikami při užívání.
+- **Zbroj (Equipable):** dává charkteru efekty, dokud je má na sobě. 
+- **Usable:** míněné pro jednorázové užití, při kterém spustí nějakou akci.
